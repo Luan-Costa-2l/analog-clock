@@ -1,29 +1,37 @@
-let digitalElement = document.querySelector('.digital');
-let sElement = document.querySelector('.p_s');
-let mElement = document.querySelector('.p_m');
-let hElement = document.querySelector('.p_h');
+// initial data
+const sElement = document.querySelector('.p_s');
+const mElement = document.querySelector('.p_m');
+const hElement = document.querySelector('.p_h');
 
-function updateClock() {
+// functions
+const getHours = () => {
     let now = new Date();
-    let hour = now.getHours();
-    let minute = now.getMinutes();
-    let second = now.getSeconds();
+    let cHours = now.getHours();
+    let cMinutes = now.getMinutes();
+    let cSeconds = now.getSeconds();
 
-    digitalElement.innerHTML = `${fixZero(hour)}:${fixZero(minute)}:${fixZero(second)}`;
+    
 
-    let sDeg = ((360 / 60) * second) - 90;
-    let mDeg = ((360 / 60) * minute) - 90;
-    let hDeg = ((360 / 12) * hour) - 90;
+    let result = `${fixZero(cHours)}:${fixZero(cMinutes)}:${fixZero(cSeconds)}`;
+    document.querySelector('.digital').innerHTML = result;
 
-    sElement.style.transform = `rotate(${sDeg}deg)`;
-    mElement.style.transform = `rotate(${mDeg}deg)`;
-    hElement.style.transform = `rotate(${hDeg}deg)`;
+    let sec = ((360 / 60) * cSeconds) - 90;
+    let min = ((360 / 60) * cMinutes) - 90;
+    let hour = ((360 / 12) * cHours) - 90;
 
+    sElement.style.transform = `rotate(${sec}deg)`;
+    mElement.style.transform = `rotate(${min}deg)`;
+    hElement.style.transform = `rotate(${hour}deg)`;
 }
 
-function fixZero(time) {
-    return (time < 10) ? `0${time}` : time;
+const fixZero = (time) => {
+    return time < 10 ? `0${time}`: time;
 }
 
-updateClock();
-setInterval(updateClock, 1000);
+// const moveSecondsPointer = () => {
+//     document.querySelector('.p_s').style.transform = 'rotate(90deg)';
+// }
+
+getHours();
+setInterval(getHours, 1000);
+
