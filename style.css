@@ -108,3 +108,12 @@ h1 {
 footer {
     font-size: 14px;
 }
+
+footer a {
+    text-decoration: none;
+    color: #FFF;
+}
+
+footer a:hover {
+    color: #999;
+}
